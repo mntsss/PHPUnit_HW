@@ -2,18 +2,17 @@
 
 namespace App\Controller;
 
-use Symfony\Component\Routing\Annotation\Route;
+use App\Service\NumberFormatter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class HomeController extends Controller
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/{number}", name="home")
      */
-    public function index()
+    public function index($number, NumberFormatter $formatter)
     {
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
+        return new Response($formatter->formatNumber($number));
     }
 }
